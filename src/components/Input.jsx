@@ -20,6 +20,9 @@ const inputStyle = `
     .input:focus {
         border-color: #cde0ff;
     }
+    .required{
+      color: red
+    }
 `
 
 
@@ -42,7 +45,7 @@ const Input = (
         </style>
       
             <label className='title'>
-                {title}:
+                {title}<span className='required'>*</span>
             </label>
             <RenderAs
                 onChange={onChange}

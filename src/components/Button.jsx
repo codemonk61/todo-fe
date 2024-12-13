@@ -11,6 +11,9 @@ const button__style = `
    padding: 10px;
    cursor: pointer
  }
+   .disabled{
+    background-color: lightgray;
+   }
    @media (max-width: 768px){
     .button{
      width: 100%
@@ -29,8 +32,8 @@ const Button = ({onClick=()=>{}, title="", disabled}) => {
     </style>
     <button
      onClick={onClick}
-     disabled={disabled}
-     className='button'
+     disabled={!disabled}
+     className={!disabled ? "disabled button" :'button'}
     >
         {title}
     </button>

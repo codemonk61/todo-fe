@@ -42,7 +42,7 @@ const Todos = () => {
         return <>
             <Tabs
                 onChange={handleTab}
-                tabData={[{ label: "Create Todo", value: "create_todo" }, { label: "Todo List", value: "todo_list" }]}
+                tabData={[{ label: "Create Notes", value: "create_todo" }, { label: "Notes List", value: "todo_list" }]}
                 selectedTab={selectedTab}
             />
             <Loader />
@@ -52,7 +52,7 @@ const Todos = () => {
         <>
             <Tabs
                 onChange={handleTab}
-                tabData={[{ label: "Create Todo", value: "create_todo" }, { label: "Todo List", value: "todo_list" }]}
+                tabData={[{ label: "Create Notes", value: "create_todo" }, { label: "Notes List", value: "todo_list" }]}
                 selectedTab={selectedTab}
             />
             {

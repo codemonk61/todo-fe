@@ -15,7 +15,57 @@ const styles = `
       cursor: pointer;
       color: gray
     }
-
+    .heading {
+     text-align: center
+    }
+    .todo {
+        border-bottom: 1px solid lightgray;
+        padding: 16px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .title__wrapper{
+        display: flex
+    }
+    .accordian__arrow{ 
+      line-height: 16px;
+      text-align: center;
+      display: block;
+    }
+    .input__style{
+        appearance: none;
+    }
+    .cut__line{
+        text-decoration: line-through;
+    }
+    .desc__wrapper { 
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+     padding: 6px;
+    }
+    .desc{ 
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .edit{
+        cursor: pointer;
+        color: #609cff;
+        font-size: 18px;
+    }
+    .remove{
+        margin-left: 12px;
+        color: #609cff;
+        cursor: pointer;
+        fontSize: 18px;
+    }
+    .created__by{ 
+        color: lightgray;
+        align-self: flex-end;
+     }
 `
 
 const TodoList = ({ pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodoId, setValue }) => {
@@ -67,25 +117,13 @@ const TodoList = ({ pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodo
             <style>
                 {styles}
             </style>
-            <h4 style={{ textAlign: "center" }}>TODO LIST</h4>
+            <h4 className='heading'>NOTES LIST</h4>
             <div >
                 {todosData.todos.map((todo, index) => (
                     todo.title && (
                         <React.Fragment key={todo._id}>
-                            <div
-                                style={{
-                                    borderBottom: "1px solid lightgray",
-                                    padding: "16px",
-                                    display: "flex",
-                                    gap: "8px",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    cursor: "pointer",
-
-                                }}
-
-                            >
-                                <div style={{ display: "flex" }}>
+                            <div className='todo'>
+                                <div className='title__wrapper'>
                                     <label htmlFor={`check__${index}`}>
                                         <span
                                             style={{
@@ -98,56 +136,48 @@ const TodoList = ({ pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodo
                                                 width: "16px",
                                                 border: "1px solid lightgray",
                                             }}
+                                            className='checkbox'
                                         >
                                             {todo.is_completed && (
-                                                <span style={{ lineHeight: "16px", textAlign: "center", display: "block" }}>
-                                                    &#10003;
+                                                <span className='accordian__arrow'>
+                                                    &#10004;
                                                 </span>
                                             )}
                                         </span>
                                     </label>
                                     <input
                                         id={`check__${index}`}
-                                        style={{ appearance: "none" }}
                                         type="checkbox"
                                         onClick={() => handleComplete(todo)}
+                                        className='input__style'
                                     />
-                                    <span style={todo.is_completed ? { textDecoration: "line-through", } : null}>{todo.title}</span>
+                                    <span className={todo.is_completed ? 'cut__line': null}>{todo.title}</span>
                                 </div>
                                 <div className={(todo._id === arrowStatus && toggle) ? 'arrow__up' : "arrow__down"} onClick={() => handleDropDown(todo._id)}>
                                     &#10094;
                                 </div>
                             </div>
-                            {(toggle && todo._id === arrowStatus) && <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "16px", transition: "width 2s, height 2s,", }}>
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                            {(toggle && todo._id === arrowStatus) && <div className='desc__wrapper'>
+                                <div className='desc'>
                                     <div>
                                         {todo.description}
                                     </div>
                                     <div>
                                         <span
-                                            style={{
-                                                cursor: "pointer",
-                                                color: "#609cff",
-                                                fontSize: "18px"
-                                            }}
+                                            className='edit'
                                             onClick={() => handleEdit(todo)}
                                         >
                                             &#9998;
                                         </span>
                                         <span
-                                            style={{
-                                                marginLeft: "12px",
-                                                color: "#609cff",
-                                                cursor: "pointer",
-                                                fontSize: "18px"
-                                            }}
+                                            className='remove'
                                             onClick={() => handleClose(todo)}
                                         >
                                             &#10006;
                                         </span>
                                     </div>
                                 </div>
-                                <p style={{ color: "lightgray", alignSelf: "flex-end" }}>Created By: {todo.created_by}</p>
+                                <p className='created__by'>Created By: {todo.created_by}</p>
                             </div>
                             }
                         </React.Fragment>

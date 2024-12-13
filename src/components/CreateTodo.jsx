@@ -11,6 +11,9 @@ const inputStyle = `
      align-items: center;
      justify-content: space-between;
     }
+    .heading {
+     text-align: center
+    }
 `
 
 const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodoId, handleTab }) => {
@@ -53,14 +56,13 @@ const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodo
         return <Loader/>
     }
 
+    const isDisable = Boolean(value.title && value.created_by && value.description)
     return (
         <>
             <style>
                 {inputStyle}
             </style>
-            {/* <Toaster /> */}
-            <h4 style={{ textAlign: "center" }}>CREATE TODO</h4>
-            {/* <div className='input__wrapper'> */}
+            <h4 className='heading'>CREATE NOTES</h4>
             <Input
                 title="Enter Topic"
                 value={value.title}
@@ -76,8 +78,6 @@ const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodo
                 placeholder='Enter your name'
                 name="created_by"
             />
-
-            {/* </div> */}
             <Input
                 title="Description"
                 RenderAs='textarea'
@@ -99,7 +99,7 @@ const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodo
                 <Button
                     title="Add"
                     onClick={handleClick}
-                    disabled={false}
+                    disabled={isDisable}
                 />
 
             )}
