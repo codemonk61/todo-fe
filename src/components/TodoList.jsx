@@ -1,6 +1,7 @@
 import React from 'react'
 import Pagination from './Pagination'
 import { completedTodo, deleteTodo } from '../fetch/todo';
+import Loader from './Loader';
 
 const styles = `
     .arrow__up {
@@ -17,19 +18,33 @@ const styles = `
 
 `
 
-const TodoList = ({pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodoId, setValue }) => {
+const TodoList = ({ pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodoId, setValue }) => {
 
     const [arrowStatus, setArrowStatus] = React.useState("")
     const [toggle, setToggle] = React.useState(false)
+    const [isLoading, setIsloading] = React.useState(false)
     const handleComplete = async (todo) => {
+        try {
+            setIsloading(true)
+            await completedTodo({ id: todo._id, title: todo.title, is_completed: !todo.is_completed, is_editable: todo.is_editable });
+            fetchAndSetTodos(pageNo, 10);
+            setIsloading(false)
+        } catch (e) {
+            setIsloading(false)
+        }
 
-        await completedTodo({ id: todo._id, title: todo.title, is_completed: !todo.is_completed, is_editable: todo.is_editable });
-        fetchAndSetTodos(pageNo, 10);
     };
 
     const handleClose = async (todo) => {
-        await deleteTodo(todo);
-        fetchAndSetTodos(pageNo, 10);
+        try {
+            setIsloading(true)
+            await deleteTodo(todo);
+            fetchAndSetTodos(pageNo, 10);
+            setIsloading(false)
+        } catch (e) {
+            setIsloading(false)
+        }
+
     };
 
     const handleEdit = (todo) => {
@@ -41,6 +56,10 @@ const TodoList = ({pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodoI
     const handleDropDown = (id) => {
         setToggle(!toggle)
         setArrowStatus(id)
+    }
+
+    if (isLoading) {
+        return <Loader />
     }
 
     return (

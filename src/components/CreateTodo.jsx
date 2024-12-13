@@ -3,6 +3,7 @@ import { createTodo, updateTodo } from "../fetch/todo";
 // import Toaster from './Toaster';
 import Button from './Button';
 import Input from './Input';
+import Loader from './Loader';
 
 const inputStyle = `
     .input__wrapper {
@@ -12,63 +13,81 @@ const inputStyle = `
     }
 `
 
-const CreateTodo = ({pageNo, fetchAndSetTodos, todoId, value, setValue, setTodoId, handleTab}) => {
+const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodoId, handleTab }) => {
 
+    const [loading, setLoading] = React.useState(false)
     const handleChange = (e) => {
-        setValue({...value, [e.target.name]:e.target.value});
+        setValue({ ...value, [e.target.name]: e.target.value });
     };
 
     const handleClick = async () => {
-        await createTodo({...value, is_completed: false, is_editable: false });
-        setValue("");
-        fetchAndSetTodos(pageNo, 10);
-        handleTab("todo_list")
+        try {
+            setLoading(true)
+            await createTodo({ ...value, is_completed: false, is_editable: false });
+            setValue("");
+            fetchAndSetTodos(pageNo, 10);
+            handleTab("todo_list")
+            setLoading(false)
+        } catch (e) {
+            setLoading(false)
+        }
+
     };
 
     const handleEditClick = async () => {
-        await updateTodo({ id: todoId, ...value, is_editable: true, is_completed: false });
-        setValue("");
-        setTodoId(null);
-        fetchAndSetTodos(pageNo, 10);
-        handleTab("todo_list")
+        try{
+            setLoading(true)
+            await updateTodo({ id: todoId, ...value, is_editable: true, is_completed: false });
+            setValue("");
+            setTodoId(null);
+            fetchAndSetTodos(pageNo, 10);
+            handleTab("todo_list")
+            setLoading(false)
+        } catch(e){
+            setLoading(false)
+        }
+       
     };
 
+    if(loading){
+        return <Loader/>
+    }
 
     return (
         <>
-          <style>
-            {inputStyle}
-          </style>
+            <style>
+                {inputStyle}
+            </style>
             {/* <Toaster /> */}
             <h4 style={{ textAlign: "center" }}>CREATE TODO</h4>
             {/* <div className='input__wrapper'> */}
-                <Input
-                    title="Enter Topic"
-                    value={value.title}
-                    onChange={handleChange}
-                    placeholder='Enter topic'
-                    name="title"
+            <Input
+                title="Enter Topic"
+                value={value.title}
+                onChange={handleChange}
+                placeholder='Enter topic'
+                name="title"
 
-                />
-                <Input
-                    title="Created By"
-                    value={value.created_by}
-                    onChange={handleChange}
-                    placeholder='Enter your name'
-                    name="created_by"
-                />
-      
+            />
+            <Input
+                title="Created By"
+                value={value.created_by}
+                onChange={handleChange}
+                placeholder='Enter your name'
+                name="created_by"
+            />
+
             {/* </div> */}
             <Input
-                    title="Description"
-                    RenderAs='textarea'
-                    value={value.description}
-                    onChange={handleChange}
-                    placeholder='Description'
-                    rows="5"
-                    cols="33"
-                    name="description"
-                />
+                title="Description"
+                RenderAs='textarea'
+                value={value.description}
+                onChange={handleChange}
+                placeholder='Description'
+                rows="5"
+                cols="33"
+                name="description"
+            />
             {todoId ? (
                 <Button
                     title="Edit"

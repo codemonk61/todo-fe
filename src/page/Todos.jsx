@@ -10,7 +10,7 @@ const Todos = () => {
     const [todosData, setTodosData] = React.useState(null);
     const [selectedTab, setSelectedTab] = React.useState("todo_list")
     const [todoId, setTodoId] = React.useState(null);
-    const [value, setValue] = React.useState({title: "", created_by: "", description: ""});
+    const [value, setValue] = React.useState({ title: "", created_by: "", description: "" });
     const [loading, setLoading] = React.useState(false)
     const [pageNo, setPageNo] = React.useState(1)
 
@@ -21,10 +21,10 @@ const Todos = () => {
             const data = await fetchTodos(pageNo, 10);
             setTodosData(data);
             setLoading(false)
-          
+
         } catch (e) {
-           console.log(e)
-           setLoading(false)
+            console.log(e)
+            setLoading(false)
         }
 
     };
@@ -39,7 +39,14 @@ const Todos = () => {
     }, []);
 
     if (!todosData || loading) {
-        return <Loader />
+        return <>
+            <Tabs
+                onChange={handleTab}
+                tabData={[{ label: "Create Todo", value: "create_todo" }, { label: "Todo List", value: "todo_list" }]}
+                selectedTab={selectedTab}
+            />
+            <Loader />
+        </>
     }
     return (
         <>
@@ -49,7 +56,7 @@ const Todos = () => {
                 selectedTab={selectedTab}
             />
             {
-              selectedTab === "create_todo" ? <CreateTodo pageNo={pageNo} handleTab={handleTab} setTodoId={setTodoId} value={value} setValue={setValue} todoId={todoId} fetchAndSetTodos={fetchAndSetTodos} /> : <TodoList pageNo={pageNo} handleTab={handleTab} setValue={setValue} setTodoId={setTodoId} fetchAndSetTodos={fetchAndSetTodos} todosData={todosData}/>
+                selectedTab === "create_todo" ? <CreateTodo pageNo={pageNo} handleTab={handleTab} setTodoId={setTodoId} value={value} setValue={setValue} todoId={todoId} fetchAndSetTodos={fetchAndSetTodos} /> : <TodoList pageNo={pageNo} handleTab={handleTab} setValue={setValue} setTodoId={setTodoId} fetchAndSetTodos={fetchAndSetTodos} todosData={todosData} />
             }
         </>
     )
