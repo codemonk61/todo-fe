@@ -8,7 +8,8 @@ const button__style = `
    border: none;
    border-radius: 6px;
    display: block;
-   padding: 10px
+   padding: 10px;
+   cursor: pointer
  }
    @media (max-width: 768px){
     .button{

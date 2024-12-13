@@ -7,7 +7,7 @@ const tabStyle = `
     gap: 8px;
    }
    .tab{
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #f4f8fe;
     cursor: pointer;
     padding-bottom: 6px;
     font-weight: bold;
