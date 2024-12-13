@@ -2,14 +2,19 @@ import React from 'react'
 
 const button__style = `
  .button{
-   background: black;
+   background: #609cff;
    color: white;
    outline: none;
    border: none;
-   border-radius: 4px;
+   border-radius: 6px;
    display: block;
    padding: 10px
  }
+   @media (max-width: 768px){
+    .button{
+     width: 100%
+    }
+   }
 
 
 `

@@ -12,14 +12,14 @@ const loaderStyle = `
     align-items: center;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color:  background: #f4f8fe;;
   }
   
   .spinner {
     width: 30px;
     height: 30px;
     border: 5px solid lightgray; 
-    border-top: 5px solid rgb(69, 66, 66); 
+    border-top: 5px solid #609cff; 
     border-radius: 50%; 
     animation: spin 1s linear infinite; 
   }

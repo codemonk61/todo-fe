@@ -12,7 +12,7 @@ const inputStyle = `
     }
 `
 
-const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, handleTab}) => {
+const CreateTodo = ({pageNo, fetchAndSetTodos, todoId, value, setValue, setTodoId, handleTab}) => {
 
     const handleChange = (e) => {
         setValue({...value, [e.target.name]:e.target.value});
@@ -21,7 +21,7 @@ const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, hand
     const handleClick = async () => {
         await createTodo({...value, is_completed: false, is_editable: false });
         setValue("");
-        fetchAndSetTodos();
+        fetchAndSetTodos(pageNo, 10);
         handleTab("todo_list")
     };
 
@@ -29,7 +29,7 @@ const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, hand
         await updateTodo({ id: todoId, ...value, is_editable: true, is_completed: false });
         setValue("");
         setTodoId(null);
-        fetchAndSetTodos();
+        fetchAndSetTodos(pageNo, 10);
         handleTab("todo_list")
     };
 
@@ -46,7 +46,6 @@ const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, hand
                     title="Enter Topic"
                     value={value.title}
                     onChange={handleChange}
-                    style={{ height: "30px", display: "block" }}
                     placeholder='Enter topic'
                     name="title"
 
@@ -55,7 +54,6 @@ const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, hand
                     title="Created By"
                     value={value.created_by}
                     onChange={handleChange}
-                    style={{ height: "30px", display: "block" }}
                     placeholder='Enter your name'
                     name="created_by"
                 />
@@ -67,7 +65,6 @@ const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, hand
                     value={value.description}
                     onChange={handleChange}
                     placeholder='Description'
-                    style={{  display: "block" }}
                     rows="5"
                     cols="33"
                     name="description"

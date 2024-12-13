@@ -10,30 +10,33 @@ const paginationStyle = `
             gap: 8px;
             margin-top: 10px;
         }
-            .active__pagination{
-             background: black;
-             color: white;
-             padding: 2px;
+            .pagination {
+             height: 24px;
+             width: 24px;
              border-radius: 4px;
-             border: 2px solid black;
+             border: 1px solid gray;
              cursor: pointer;
+             text-align: center;
+             line-height: 24px;
             }
-            .nonactive__pagination {
-             border: 2px solid black;
-             padding: 2px;
-             border-radius: 4px;
+            .active__pagination{
+             background: #609cff;
+              border: 1px solid #609cff;
+             color: white;
             }
             .disable{
              pointer-events: none;
-             color: white
+             visibility: hidden;
              }
             .enable{
              pointer-events: auto;
              cursor: pointer;
              }
              .arrow{
-               font-size: 18px;
-              font-weight: 600;
+               font-size: 16px;
+               color: gray;
+               font-weight: 200
+
              }
 
 `
@@ -61,7 +64,7 @@ const Pagination = ({ length, onClick = () => { }, pageNo = 1, totalPage }) => {
                 </div>
                 {
                     Array.from({ length: length }).map((_, index) => {
-                        return <div key={index} className={(index + 1) === pageNo ? 'active__pagination' : 'nonactive__pagination enable'} onClick={() => handlePaginationClick(index + 1)}>
+                        return <div key={index} className={(index + 1) === pageNo ? 'active__pagination pagination' : 'pagination enable'} onClick={() => handlePaginationClick(index + 1)}>
                             {index + 1}
                         </div>
                     })
