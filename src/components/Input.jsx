@@ -17,6 +17,9 @@ const inputStyle = `
         outline: none;
         box-sizing: border-box; /* Ensures padding/border don't extend beyond container width */
     }
+    .input::placeholder{
+        color: lightgray
+    }
     .input:focus {
         border-color: #cde0ff;
     }
