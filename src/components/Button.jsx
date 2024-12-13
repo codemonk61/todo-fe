@@ -9,7 +9,8 @@ const button__style = `
    border-radius: 6px;
    display: block;
    padding: 10px;
-   cursor: pointer
+   cursor: pointer;
+   width: 10%
  }
    .disabled{
     background-color: lightgray;

@@ -90,14 +90,14 @@ const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodo
             />
             {todoId ? (
                 <Button
-                    title="Edit"
+                    title="EDIT"
                     onClick={handleEditClick}
                     disabled={false}
                 />
 
             ) : (
                 <Button
-                    title="Add"
+                    title="ADD"
                     onClick={handleClick}
                     disabled={isDisable}
                 />
