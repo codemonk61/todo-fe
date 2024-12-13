@@ -19,8 +19,6 @@ const CreateTodo = ({ fetchAndSetTodos, todoId, value, setValue, setTodoId, hand
     };
 
     const handleClick = async () => {
-        console.log(value)
-      
         await createTodo({...value, is_completed: false, is_editable: false });
         setValue("");
         fetchAndSetTodos();

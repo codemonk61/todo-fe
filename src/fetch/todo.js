@@ -6,7 +6,7 @@ export const fetchTodos = async(page_no = 1, page_size = 10) => {
 
 export const createTodo = async(todos,) => {
     try {
-        const response = await fetch(`https://todo-bbfj.onrender.com/api/todo`, {
+        await fetch(`https://todo-bbfj.onrender.com/api/todo`, {
             method: 'POST', // specify POST request
             headers: {
                 'Content-Type': 'application/json', // specify JSON content
@@ -20,7 +20,7 @@ export const createTodo = async(todos,) => {
 
 export const updateTodo = async(todo) => {
     try {
-        const response = await fetch(`https://todo-bbfj.onrender.com/api/todo/${todo.id}`, {
+        await fetch(`https://todo-bbfj.onrender.com/api/todo/${todo.id}`, {
             method: 'PUT', // Specify the PUT request
             headers: {
                 'Content-Type': 'application/json', // Send data as JSON
@@ -36,7 +36,7 @@ export const updateTodo = async(todo) => {
 export const completedTodo = async(todo) => {
    
     try {
-        const response = await fetch(`https://todo-bbfj.onrender.com/api/todo/completed/${todo.id}`, {
+        await fetch(`https://todo-bbfj.onrender.com/api/todo/completed/${todo.id}`, {
             method: 'PUT', // Specify the PUT request
             headers: {
                 'Content-Type': 'application/json', // Send data as JSON
@@ -51,7 +51,7 @@ export const completedTodo = async(todo) => {
 
 export const deleteTodo = async(todo) => {
     try {
-        const response = await fetch(`https://todo-bbfj.onrender.com/api/todo/${todo._id}`, {
+        await fetch(`https://todo-bbfj.onrender.com/api/todo/${todo._id}`, {
             method: 'DELETE', // Specify the DELETE request
             headers: {
                 'Content-Type': 'application/json', // Send data as JSON
