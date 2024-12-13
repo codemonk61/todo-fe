@@ -44,7 +44,7 @@ const styles = `
      display: flex;
      flex-direction: column;
      gap: 16px;
-     padding: 6px;
+     padding: 12px 20px;
     }
     .desc{ 
         display: flex;
