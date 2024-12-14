@@ -92,7 +92,7 @@ const CreateTodo = ({ pageNo, fetchAndSetTodos, todoId, value, setValue, setTodo
                 <Button
                     title="EDIT"
                     onClick={handleEditClick}
-                    disabled={false}
+                    disabled={isDisable}
                 />
 
             ) : (
