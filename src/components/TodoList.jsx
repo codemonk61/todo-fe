@@ -140,7 +140,7 @@ const TodoList = ({ pageNo, handleTab, fetchAndSetTodos, todosData = {}, setTodo
                                         >
                                             {todo.is_completed && (
                                                 <span className='accordian__arrow'>
-                                                    &#10004;
+                                                    &#10003;
                                                 </span>
                                             )}
                                         </span>
